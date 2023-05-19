@@ -1,0 +1,97 @@
+body{
+    background-image: url(zico2.avif);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+#myTable1{
+    font-size:large;
+    font-weight:600;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    color: black;
+}
+#myTable2{
+    font-size:large;
+    font-weight:600;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    color: black;
+}
+#myTable3{
+    font-size:large;
+    font-weight:600;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    color: black;
+}
+#myTable4{
+    font-size:large;
+    font-weight:600;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    color: black;
+}
+#myTable5{
+    font-size:large;
+    font-weight:600;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    color: black;
+}
+#myTable6{
+    font-size:large;
+    font-weight:600;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    color: black;
+}
+#myTable7{
+    font-size:large;
+    font-weight:600;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    color: black;
+}
+#myTable8{
+    font-size:large;
+    font-weight:600;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    color: black;
+}
+
+
+.col-lg-5{
+    background-color: transparent;
+    height: 41pc;
+    width: 20pc;
+    box-shadow: 0px 5px 2px 2px rgb(141, 141, 230);
+    margin-top: 10pc;
+    backdrop-filter: blur(15px);
+}
+
+#inp{
+    margin-top: 3pc;
+    width: 15pc;
+    height: 6vh;
+   font-size: large;
+   font-weight: bold;
+   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+#btn{
+    height: 7vh;
+    background-color: rgb(141, 141, 230);
+    font-weight: bolder;
+    color: white;
+    width: 7pc;
+}
+
+#dispq{
+    color: rgb(81, 81, 194);
+    margin-top: 15PC;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+#size{
+    font-size: 140px;
+}
+
+#loc{
+    color: rgb(81, 81, 194);
+    margin-left: 5pc;
+}
