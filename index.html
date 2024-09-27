@@ -4,146 +4,72 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Weather App</title>
     <link rel="stylesheet" href="phone.css">
     <link rel="stylesheet" href="ok.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 </head>
 <body>
     <div class="container">
-     <div class="row">
-        <div class="col-lg-7">
-         <input type="text" placeholder="input your location" id="inp" style="border: 0px; border-bottom: 2px solid;">
-         <button onclick="search()" id="btn">Search</button>
-           <div id="dispk"></div>
-           <div id="dispq"></div>
-           <div id="loc"></div>
-        </div>
+        <div class="row">
+            <div class="col-lg-7">
+                <input type="text" placeholder="Input your location" id="inp" class="form-control mb-3" style="border: 0px; border-bottom: 2px solid;">
+                <button onclick="search()" id="btn" class="btn btn-primary mb-3">Search</button>
+                <div id="dispk"></div>
+                <div id="dispq"></div>
+                <div id="loc"></div>
+            </div>
 
-        <div class="col-lg-5">
-            <div id="Details" style="font-size: x-large; font-weight: bold; margin-left: 8pc; color: black;">Weather Details</div>
-            <br><br>
-            <div id="myTable1">
-                <tr>
-                    <td>Location:</td>
-                </tr>
-            </div>
-            <br><br>
-            <div id="myTable2">
-                <tr>
-                    <td>Description</td>
-                </tr>
-            </div>
-            <br><br>
-            <div id="myTable3">
-                <tr>
-                    <td>Humidity</td>
-                </tr>
-            </div>
-            <br><br>
-            <div id="myTable4">
-                <tr>
-                    <td>Wind</td>
-                </tr>
-            </div>
-            <hr style="border:solid white;border-radius: 1pc;">
-            <div id="myTable5">
-                <tr>
-                    <td>Min</td>
-                </tr>
-            </div>
-            <br><br>
-            <div id="myTable6">
-                <tr>
-                    <td>Max</td>
-                </tr>
-            </div>
-            <br><br>
-            <div id="myTable7">
-                <tr>
-                    <td>Feels</td>
-                </tr>
-            </div>
-            <br><br>
-            <div id="myTable8">
-                <tr>
-                    <td>Pressure</td>
-                </tr>
+            <div class="col-lg-5">
+                <div id="Details" style="font-size: x-large; font-weight: bold; text-align: center; color: black;">Weather Details</div>
+                <div id="weather-details" class="mt-4">
+                    <p><strong>Location:</strong> <span id="myTable1"></span></p>
+                    <p><strong>Description:</strong> <span id="myTable2"></span></p>
+                    <p><strong>Humidity:</strong> <span id="myTable3"></span></p>
+                    <p><strong>Wind:</strong> <span id="myTable4"></span></p>
+                    <p><strong>Min:</strong> <span id="myTable5"></span></p>
+                    <p><strong>Max:</strong> <span id="myTable6"></span></p>
+                    <p><strong>Feels like:</strong> <span id="myTable7"></span></p>
+                    <p><strong>Pressure:</strong> <span id="myTable8"></span></p>
+                </div>
             </div>
         </div>
-     </div>
     </div>
- 
-     
 
-
-   <!-- JAVASCRIPT -->
-
-
+    <!-- JAVASCRIPT -->
     <script>
-        const search=async()=>{
-           let cityname=inp.value
-           let key='f6a364d16c14c346d52b383fb5e52f1f'
-            let url=`https://api.openweathermap.org/data/2.5/weather?q=${cityname}&appid=${key}`
-            let response =await fetch(url)
-            let convertRes =await response.json()
-            console.log(convertRes);
-            for (let index = 0; index < convertRes.length; index++) {
-                dispk.innerHTML=(convertRes[index])
+        const search = async () => {
+            let cityname = document.getElementById("inp").value;
+            let key = 'f6a364d16c14c346d52b383fb5e52f1f';
+            let url = `https://api.openweathermap.org/data/2.5/weather?q=${cityname}&appid=${key}`;
+            
+            try {
+                let response = await fetch(url);
+                
+                if (!response.ok) {
+                    throw new Error("City not found");
+                }
+                
+                let convertRes = await response.json();
+                console.log(convertRes);
+                
+                document.getElementById("dispq").innerHTML = `<h1 id="size">${Math.round(convertRes.main.feels_like - 273)}°C</h1>`;
+                document.getElementById("loc").innerHTML = `<h1 style="font-size: 30px;">${convertRes.name}, ${convertRes.sys.country}</h1>`;
+                
+                document.getElementById("myTable1").innerText = `${convertRes.name}, ${convertRes.sys.country}`;
+                document.getElementById("myTable2").innerText = convertRes.weather[0].description;
+                document.getElementById("myTable3").innerText = `${convertRes.main.humidity}%`;
+                document.getElementById("myTable4").innerText = `${convertRes.wind.speed} m/s`;
+                document.getElementById("myTable5").innerText = `${Math.round(convertRes.main.temp_min - 273)}°C`;
+                document.getElementById("myTable6").innerText = `${Math.round(convertRes.main.temp_max - 273)}°C`;
+                document.getElementById("myTable7").innerText = `${Math.round(convertRes.main.feels_like - 273)}°C`;
+                document.getElementById("myTable8").innerText = `${convertRes.main.pressure} hPa`;
+            } catch (error) {
+                alert(error.message);
             }
-
-
-           dispq.innerHTML=`
-            <h1 id="size">${Math.ceil(convertRes.main.feels_like -273)}°C</h1>
-           `
-
-           loc.innerHTML=`
-            <h1 style="font-size: 30px;">${convertRes.name}, ${convertRes.sys.country}</h1>
-           `
-
-
-            myTable1.innerHTML=`
-             <tr>
-               <td>Location <span style="padding-left: 11pc;">${convertRes.name}</td>, <td>${convertRes.sys.country}</span></td> 
-            </tr>
-            `
-            myTable2.innerHTML=`
-            <tr>
-               <td>Description <span style="padding-left: 10pc;">${convertRes.weather[0].description}</span></td> 
-            </tr>
-            `
-            myTable3.innerHTML=`
-            <tr>
-               <td>Humidity <span style="padding-left: 12pc;">${Math.ceil(convertRes.main.temp -273)}%</span></td> 
-            </tr>
-            `
-            myTable4.innerHTML=`
-            <tr>
-               <td>Wind <span style="padding-left: 14pc;">${convertRes.wind.speed}m/s</span></td> 
-            </tr>
-            `
-            myTable5.innerHTML=`
-            <tr>
-               <td>Min <span style="padding-left: 15pc;">${Math.ceil(convertRes.main.temp_min -273)}°C</span></td> 
-            </tr>
-            `
-            myTable6.innerHTML=`
-            <tr>
-               <td>Max <span style="padding-left: 15pc;">${Math.ceil(convertRes.main.temp_max)}°C</span></td> 
-            </tr>
-            `
-            myTable7.innerHTML=`
-            <tr>
-               <td>Feel <span style="padding-left: 15pc;">${Math.ceil(convertRes.main.feels_like -273)}°C</span></td> 
-            </tr>
-            `
-            myTable8.innerHTML=`
-            <tr>
-               <td>Pressure <span style="padding-left: 12pc;">${convertRes.main.pressure} hPa</span></td> 
-            </tr>
-            `
-        }
+        };
     </script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 </body>
 </html>

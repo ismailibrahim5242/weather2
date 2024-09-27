@@ -1,97 +1,117 @@
-body{
+/* Body background with an overlay for better text visibility */
+body {
     background-image: url(zico2.avif);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    background-attachment: fixed; /* Makes the background fixed during scrolling */
+    position: relative;
 }
 
-#myTable1{
-    font-size:large;
-    font-weight:600;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    color: black;
+/* Overlay for better readability */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4); /* Dark overlay */
+    z-index: -1;
 }
-#myTable2{
-    font-size:large;
-    font-weight:600;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    color: black;
-}
-#myTable3{
-    font-size:large;
-    font-weight:600;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    color: black;
-}
-#myTable4{
-    font-size:large;
-    font-weight:600;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    color: black;
-}
-#myTable5{
-    font-size:large;
-    font-weight:600;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    color: black;
-}
-#myTable6{
-    font-size:large;
-    font-weight:600;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    color: black;
-}
-#myTable7{
-    font-size:large;
-    font-weight:600;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    color: black;
-}
-#myTable8{
-    font-size:large;
-    font-weight:600;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
+
+/* Shared table styles */
+.table-text {
+    font-size: 1.2rem; /* Use rem for scalable font sizes */
+    font-weight: 600;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: black;
 }
 
+/* Apply class to all similar elements */
+#myTable1, #myTable2, #myTable3, #myTable4, #myTable5, #myTable6, #myTable7, #myTable8 {
+    /* No need to repeat the styles */
+    padding-bottom: 0.5rem;
+}
 
-.col-lg-5{
-    background-color: transparent;
-    height: 41pc;
-    width: 20pc;
-    box-shadow: 0px 5px 2px 2px rgb(141, 141, 230);
-    margin-top: 10pc;
+.col-lg-5 {
+    background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+    height: auto; /* Use auto for height to avoid overflow */
+    width: 100%; /* Make it responsive */
+    max-width: 300px; /* Limit the max width */
+    box-shadow: 0px 5px 15px rgba(141, 141, 230, 0.5); /* Softer shadow */
+    margin-top: 5rem; /* rem for consistency */
     backdrop-filter: blur(15px);
+    padding: 2rem; /* Add padding for spacing inside */
+    border-radius: 15px; /* Rounded corners */
+    text-align: center; /* Center align content */
 }
 
-#inp{
-    margin-top: 3pc;
-    width: 15pc;
-    height: 6vh;
-   font-size: large;
-   font-weight: bold;
-   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+#inp {
+    margin-top: 2rem;
+    width: 100%;
+    height: 40px; /* Fixed height */
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: 'Cambria', serif;
+    border: none;
+    border-bottom: 2px solid #8d8de6; /* Match with the button color */
+    background: transparent;
+    color: white; /* White text for better readability */
 }
 
-#btn{
-    height: 7vh;
-    background-color: rgb(141, 141, 230);
+#btn {
+    height: 45px;
+    background-color: #8d8de6;
     font-weight: bolder;
     color: white;
-    width: 7pc;
+    width: 100%;
+    border: none;
+    margin-top: 1rem;
+    transition: background-color 0.3s;
+    cursor: pointer;
 }
 
-#dispq{
+#btn:hover {
+    background-color: #6c6cd6; /* Slightly darker on hover */
+}
+
+#dispq {
     color: rgb(81, 81, 194);
-    margin-top: 15PC;
-    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin-top: 3rem;
+    font-family: 'Cambria', serif;
 }
 
-#size{
-    font-size: 140px;
+#size {
+    font-size: 8rem; /* Use rem for scalable font size */
+    line-height: 1; /* Adjust line height */
+    color: white; /* Make the temperature more visible */
 }
 
-#loc{
+#loc {
     color: rgb(81, 81, 194);
-    margin-left: 5pc;
+    margin-left: 2rem; /* Reduce excessive margin */
+    text-align: center; /* Center align the location */
+}
+
+/* Media Query for responsiveness */
+@media only screen and (max-width: 600px) {
+    #size {
+        font-size: 4rem; /* Smaller size on mobile */
+    }
+
+    .col-lg-5 {
+        max-width: 100%; /* Full width for smaller screens */
+        margin-top: 2rem;
+    }
+
+    #inp, #btn {
+        width: 100%; /* Make the input and button full width */
+        font-size: 1rem;
+    }
+
+    #loc {
+        margin-left: 0;
+        font-size: 1.2rem; /* Adjust size for smaller screens */
+    }
 }
